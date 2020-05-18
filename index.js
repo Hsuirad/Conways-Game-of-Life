@@ -16,8 +16,7 @@ document.addEventListener("click", event => {
     my = event.clientY;
     mx = Math.floor(mx/scaleX);
     my = Math.floor(my/scaleY);
-    if(mx < 10) console.log('you have 10002039423 chromosomes')
-    else console.log(`Mouse is at: (${mx}, ${my})`)
+    console.log(`Clicked at: (${mx}, ${my})`);
     cubes[my][mx].filled = !cubes[my][mx].filled;
 })
 
@@ -58,9 +57,6 @@ class Cube{
     }
 }
 
-let upDown;
-let leftRight;
-
 c.clearRect(0, 0, canvas.width, canvas.height);
 
 let numOfBlocks = Math.floor(canvas.width/scaleX*canvas.height/scaleY)
@@ -71,15 +67,12 @@ for(let i =0; i < cubes.length;i++){
     cubes[i]=new Array(Math.floor(canvas.width/scaleX))
 }
 
-
 for(let i = 0; i < Math.floor(canvas.height/scaleY); i++){
     for(let j = 0; j < Math.floor(canvas.width/scaleX); j++){
-        //console.log(`${i}:::::${j}`)
         cubes[i][j]=(new Cube(j, i, (Math.round(Math.random()*0.7))))
     }
 }
 
-console.log(cubes[0][0].filled)
 
 c.fillStyle = 'white'
 c.fillRect(0, 0, canvas.width, canvas.height)
