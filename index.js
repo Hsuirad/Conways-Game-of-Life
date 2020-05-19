@@ -10,6 +10,7 @@ let my = 0;
 
 let scaleX = canvas.width/100;
 let scaleY = scaleX
+let pause = false;
 
 document.addEventListener("click", event => {
     mx = event.clientX;
@@ -19,6 +20,10 @@ document.addEventListener("click", event => {
     console.log(`Clicked at: (${mx}, ${my})`);
     cubes[my][mx].filled = !cubes[my][mx].filled;
 })
+
+document.onkeydown = e => {
+    e.key == 'p'?pause = true:pause=false;
+}
 
 class Cube{
     constructor(x, y, filled){
@@ -81,8 +86,13 @@ cubes.forEach(e => e.forEach(i => i.draw()));
 let animate = () => {
     c.fillStyle = 'white'
     c.fillRect(0, 0, canvas.width, canvas.height)
-    cubes.forEach(e => e.forEach(i => i.getNeighbors()));
-    cubes.forEach(e => e.forEach(i => i.update()));
+    if(!pause){
+        cubes.forEach(e => e.forEach(i => i.getNeighbors()));
+        cubes.forEach(e => e.forEach(i => i.update()));
+    }
+    else{
+        cubes.forEach(e => e.forEach(i => i.draw()));
+    }
 }
 
 setInterval(animate, 50);
